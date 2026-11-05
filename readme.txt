@@ -1,4 +1,4 @@
-== Farmacia Della Bona ==
+== Farmacia Della Bona Theme ==
 
 Contributors: Giacomo Secchi
 Requires at least: 6.9

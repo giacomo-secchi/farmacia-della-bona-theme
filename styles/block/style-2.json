@@ -21,7 +21,6 @@
             "gradient": "var:preset|gradient|gradient-1"
         },
         "typography": {
-            "fontSize": "var:preset|font-size|x-small",
             "fontWeight": "300"
         },
         "spacing":{
@@ -38,7 +37,7 @@
         "elements": { 
             "heading": {
                 "typography": {
-                    "fontSize": "48px",
+                    "fontSize": "var:preset|font-size|xxx-large",
                     "textAlign": "center"
                 },
 				"color": {

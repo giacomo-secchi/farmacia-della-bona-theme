@@ -138,8 +138,8 @@ $content = <<<HTML
 <!-- wp:cover {$cover_attributes_json} -->
 <div class="wp-block-cover alignfull is-dark is-style-background-2" style="min-height:65vh;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)">{$image_html}<span aria-hidden="true" class="{$overlay_class}"></span><div class="wp-block-cover__inner-container"><!-- wp:columns {"verticalAlignment":"center","align":"wide","powderMotion":true,"powderMotionEffect":"fadeInUp","powderDuration":1,"powderMotionDistance":"60"} -->
 <div class="wp-block-columns alignwide are-vertically-aligned-center" data-motion="fadeInUp" data-duration="1" data-distance="60"><!-- wp:column {"verticalAlignment":"center","layout":{"type":"constrained","justifyContent":"right"}} -->
-<div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"style":{"typography":{"fontSize":"48px"}}} -->
-<h2 class="wp-block-heading" style="font-size:48px">{$title_html}</h2>
+<div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"fontSize":"xxx-large"} -->
+<h2 class="wp-block-heading has-xxx-large-font-size">{$title_html}</h2>
 <!-- /wp:heading -->
 
 {$subtitle_block}

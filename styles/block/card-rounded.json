@@ -14,7 +14,7 @@
                 "border": {
                     "radius": "100%"
                 },
-                "typography": {
+                "dimensions": {
                     "aspectRatio": "1"
                 }
             },

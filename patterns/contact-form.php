@@ -7,8 +7,8 @@
 ?>
 
 <!-- wp:cover {"url":"<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/images/DSC_4840.JPG'; ?>","dimRatio":90,"overlayColor":"primary","isUserOverlayColor":true,"sizeSlug":"large","align":"full","className":"is-dark is-style-background-2","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}},"layout":{"type":"default"}} -->
-<div class="wp-block-cover alignfull is-dark is-style-background-2" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)"><img class="wp-block-cover__image-background size-large" alt="" src="<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/images/DSC_4840.JPG'; ?>" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-90 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"fontSize":"xx-large"} -->
-<h2 class="wp-block-heading has-xx-large-font-size">Contattaci</h2>
+<div class="wp-block-cover alignfull is-dark is-style-background-2" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)"><img class="wp-block-cover__image-background size-large" alt="" src="<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/images/DSC_4840.JPG'; ?>" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-90 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:heading {"fontSize":"xxx-large"} -->
+<h2 class="wp-block-heading has-xxx-large-font-size">Contattaci</h2>
 <!-- /wp:heading -->
 
 <!-- wp:columns {"verticalAlignment":null,"align":"wide","className":"is-style-default"} -->

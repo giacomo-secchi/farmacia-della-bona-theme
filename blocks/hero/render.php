@@ -18,7 +18,7 @@ $selector = $queried_object instanceof WP_Term ? 'term_' . $queried_object->term
 $fields = get_fields( $selector );
 $fields = is_array( $fields ) ? $fields : [];
 
-$hero_title         = $fields['hero_title'] ?? '';
+$hero_title         = (string) get_field( 'hero_title', $selector, false );
 $hero_subtitle      = $fields['hero_subtitle'] ?? '';
 $hero_button_text   = $fields['hero_button_text'] ?? '';
 $hero_button_link   = $fields['hero_button_link'] ?? '';

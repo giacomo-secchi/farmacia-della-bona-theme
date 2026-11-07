@@ -73,6 +73,9 @@
 				}
 			]
 		},
+		"viewport": {
+			"mobile": "599px"
+		},
 		"typography": {
 			"fontFamilies": [
 				{
@@ -206,7 +209,10 @@
 				"css": "& { --jetpack--contact-form--border-color: var(--wp--preset--color--neutral); }"
 			},
 			"core/navigation": {
-				"css": "& .wp-block-navigation-item:hover { color: var(--wp--preset--color--contrast); }"
+				"css": "& .wp-block-navigation-item:hover { color: var(--wp--preset--color--contrast); } & .wp-block-navigation__responsive-container-open { margin-left: auto !important; }",
+				"@mobile": {
+					"css": "& .wp-block-navigation__responsive-container { --navigation-layout-justification-setting: center; text-align: center; }"
+				}
 			},
 			"jetpack/whatsapp-button": {
 				"css": "& .whatsapp-block__button { border-radius: 50px !important; background-position: center !important; padding: var(--wp--preset--spacing--30) !important; box-shadow: var(--wp--preset--shadow--natural);}"
@@ -285,6 +291,7 @@
 				}
 			}
 		},
+		"css": "@media (min-width: 1200px) { .site-menu .wp-block-navigation__container::before { content: ''; } }",
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--helvetica-neue)",
 			"fontSize": "var(--wp--preset--font-size--small)",

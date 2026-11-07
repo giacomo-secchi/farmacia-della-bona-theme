@@ -12,7 +12,7 @@
 <div class="wp-block-group alignfull is-style-section-1">
 
 <!-- wp:paragraph -->
-<p>Servizi Disponibili.</p>
+<p>Servizi Disponibili</p>
 <!-- /wp:paragraph -->
  <!-- wp:heading -->
 <h2 class="wp-block-heading">I Nostri Servizi</h2>

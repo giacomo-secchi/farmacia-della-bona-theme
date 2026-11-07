@@ -11,7 +11,8 @@ add_action( 'init', function () {
      * Filter allows third-party developers or child themes to add their own block directories.
      */
     $blocks_locations = apply_filters( 'farmacia_della_bona_blocks_locations', [
-        __DIR__ . '/build/blocks',
+        // Output directory of `wp-scripts build --source-path=blocks`.
+        dirname( __DIR__ ) . '/build',
     ] );
 
     if ( ! is_array( $blocks_locations ) ) {

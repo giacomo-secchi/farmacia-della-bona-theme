@@ -1,39 +1,44 @@
 <?php
 /**
- * Automatically populates ACF fields based on naming convention.
- * Example: 'hero_overlay_color_palette_default' 
- * Path generated: ['color', 'palette', 'default']
+ * Automatically populates ACF select fields based on a naming convention.
+ *
+ * Examples:
+ *   'hero_overlay_color_palette'         -> theme + default + custom palettes
+ *   'hero_overlay_color_palette_all'     -> theme + default + custom palettes
+ *   'hero_overlay_color_palette_theme'   -> ['color', 'palette', 'theme']
+ *   'hero_overlay_color_palette_default' -> ['color', 'palette', 'default']
  */
 add_filter( 'acf/load_field', function( $field ) {
 
-    // Intercettiamo solo i campi con la nostra convenzione '_color_palette_'
+    // Only handle select fields that follow the '_color_palette' convention.
     if ( $field['type'] !== 'select' || ! str_contains( $field['name'], '_color_palette' ) ) {
         return $field;
     }
 
-    // Estraiamo il target (es: 'all', 'theme', 'default')
-    $target = explode( '_color_palette', $field['name'] )[1];
+    // Extract the palette origin after the convention marker (e.g. 'all', 'theme', 'default').
+    $parts  = explode( '_color_palette', $field['name'], 2 );
+    $target = ltrim( $parts[1] ?? '', '_' );
 
-    // Definiamo le sorgenti. Se 'all', includiamo anche 'custom' per i plugin.
-    $sources = ( empty( $suffix ) ) ? ['theme', 'default', 'custom'] : [$target];
+    $valid_origins = [ 'theme', 'default', 'custom' ];
+
+    // With no target, 'all' or an unknown origin, include every palette (including 'custom' for plugins).
+    $sources = in_array( $target, $valid_origins, true ) ? [ $target ] : $valid_origins;
 
     $all_colors = [];
     foreach ( $sources as $source ) {
-        $palette = wp_get_global_settings( ['color', 'palette', $source] );
-        
+        $palette = wp_get_global_settings( [ 'color', 'palette', $source ] );
+
         if ( empty( $palette ) || ! is_array( $palette ) ) {
             continue;
         }
 
         foreach ( $palette as $color ) {
-            // Salta se manca lo slug (identificatore fondamentale)
+            // Skip colors without a slug, which is the identifier we store.
             if ( ! isset( $color['slug'] ) ) {
                 continue;
             }
 
-            // Priorità: il primo trovato vince. 
-            // In questo modo i colori del tuo theme.json (primo in $sources) 
-            // non vengono sovrascritti dal core di WP.
+            // First match wins, so theme.json colors (first in $sources) are not overridden by core defaults.
             if ( ! isset( $all_colors[ $color['slug'] ] ) ) {
                 $all_colors[ $color['slug'] ] = $color;
             }
@@ -44,11 +49,10 @@ add_filter( 'acf/load_field', function( $field ) {
         return $field;
     }
 
-    // Inizializziamo le scelte (English base localization)
     $field['choices'] = [ '' => __( 'None (Transparent)', 'farmacia-della-bona' ) ];
 
     foreach ( $all_colors as $color ) {
-        // Usiamo lo slug come valore e il nome (o lo slug come fallback) come etichetta
+        // Use the slug as value and the name (or the slug as fallback) as label.
         $label = isset( $color['name'] ) ? $color['name'] : ucfirst( $color['slug'] );
         $field['choices'][ $color['slug'] ] = $label;
     }

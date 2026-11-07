@@ -1,6 +1,24 @@
 <?php
 
 /**
+ * Returns the block variations configuration, built once per request.
+ *
+ * The render filters below run for every block on the page, so the translated
+ * configuration is cached instead of being rebuilt on each call.
+ *
+ * @return array
+ */
+function farmaciadellabona_get_block_variations_config() {
+    static $config = null;
+
+    if ( null === $config ) {
+        $config = apply_filters( 'farmaciadellabona_block_variations_config', [] );
+    }
+
+    return $config;
+}
+
+/**
  * This function intercepts the block rendering process to apply custom logic based on the block's 'namespace' attribute.
  * It handles 'core/query' blocks by registering a one-time filter to modify WP_Query arguments for dynamic 
  * filtering, while for all other blocks, it executes a callback immediately to allow on-the-fly 
@@ -19,7 +37,7 @@ add_filter( 'pre_render_block', function ( $pre_render, $parsed_block ) {
     }
 
     // Retrieve the centralized configuration for block variations.
-    $config = apply_filters( 'farmaciadellabona_block_variations_config', [] );
+    $config = farmaciadellabona_get_block_variations_config();
     
     // Early exit if the current block type is not defined in our configuration.
     if ( ! isset( $config[ $block_name ] ) ) {
@@ -93,7 +111,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
         return $block_content;
     }
 
-    $config = apply_filters( 'farmaciadellabona_block_variations_config', [] );
+    $config = farmaciadellabona_get_block_variations_config();
     $block_name = $block['blockName'];
 
     // Skip if the block type is not in our configuration.
@@ -176,8 +194,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
             
             case 'post_object':
             case 'page_link':
-                    // Se l'admin seleziona un prodotto, ACF restituisce l'ID o l'oggetto.
-                    // Noi estraiamo l'ID numerico.
+                // ACF returns either the post ID or the post object; keep the numeric ID.
                 $replacements[ $field_slug ] = is_object( $field_value ) ? $field_value->ID : (string) $field_value;
                 break;
 
@@ -208,28 +225,4 @@ add_filter( 'render_block', function( $block_content, $block ) {
     }
 
     return $block_content;
-}, 10, 2 );
-
-
-
-add_filter( 'pre_render_block', function( $pre_render, $block ) {
-    if ( isset($block['blockName']) && $block['blockName'] === 'woocommerce/single-product' ) {
-        
-        // Se il productId è il nostro placeholder stringa
-        if ( isset($block['attrs']['productId']) && $block['attrs']['productId'] === 'hero_product_id' ) {
-            
-            $term = get_queried_object();
-            // Recuperiamo l'ID reale da ACF
-            $real_id = get_field( 'hero_product_id', $term ) ?: get_field( 'hero_product_id', 'option' );
-            
-            if ( $real_id ) {
-                // Forziamo l'ID come intero. Questo risolve il Warning "postId"
-                $block['attrs']['productId'] = (int) $real_id;
-            } else {
-                // Se non c'è un prodotto, mettiamo un ID fittizio per non rompere il plugin
-                $block['attrs']['productId'] = 0;
-            }
-        }
-    }
-    return $pre_render;
 }, 10, 2 );

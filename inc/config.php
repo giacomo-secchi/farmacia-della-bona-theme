@@ -1,16 +1,11 @@
 <?php
 
-
-
-add_filter( 'farmacia_della_bona_blocks_locations', function( $locations ) {
-    $locations[] = get_stylesheet_directory() . '/build';
-    return $locations;
-} );
-
 add_filter( 'farmaciadellabona_block_variations_config', function ( $config ) {
-    
-    // Aggiungiamo le varianti per il blocco Query
-    $config = [
+
+    $config = is_array( $config ) ? $config : [];
+
+    $theme_variations = [
+        // Query Loop variations.
         'core/query' => [
             [
                 'name'      => 'staff-highlight-query',
@@ -22,7 +17,7 @@ add_filter( 'farmaciadellabona_block_variations_config', function ( $config ) {
                     'query'     => [
                         'postType' => 'team_member',
                         'perPage'  => 1,
-                        'inherit'  => false, 
+                        'inherit'  => false,
                     ],
                     'callback'  => 'farmaciadellabona_filter_staff_query'
                 ],
@@ -38,11 +33,11 @@ add_filter( 'farmaciadellabona_block_variations_config', function ( $config ) {
                     'query'     => [
                         'postType' => 'event',
                         'perPage'  => 2,
-                        'inherit'  => false, 
+                        'inherit'  => false,
                     ],
                     'callback'  => 'farmaciadellabona_filter_events_query'
                 ],
-                'scope'      => [ 'inserter' ], // Lo rende visibile nel menu dei blocchi.
+                'scope'      => [ 'inserter' ], // Makes it visible in the block inserter.
             ],
             [
                 'name'       => 'post-highlight-query',
@@ -53,7 +48,7 @@ add_filter( 'farmaciadellabona_block_variations_config', function ( $config ) {
                     'namespace' => 'post-highlight-query',
                     'query'     => [
                         'perPage'  => 2,
-                        'inherit'  => false, 
+                        'inherit'  => false,
                     ],
                     'callback'  => 'farmaciadellabona_filter_posts_query'
                 ],
@@ -69,7 +64,7 @@ add_filter( 'farmaciadellabona_block_variations_config', function ( $config ) {
                     'query'     => [
                         'postType' => 'service',
                         'perPage'  => 6,
-                        'inherit'  => false, 
+                        'inherit'  => false,
                     ],
                     'callback'  => 'farmaciadellabona_filter_services_by_current_cat'
                 ],
@@ -87,90 +82,106 @@ add_filter( 'farmaciadellabona_block_variations_config', function ( $config ) {
                     'acf_fields'    => [
                         'section_department_service_image'
                     ],
-
                 ],
-            ] 
+            ]
         ]
-
     ];
+
+    // Append to variations registered by other callbacks instead of replacing them.
+    foreach ( $theme_variations as $block_name => $variations ) {
+        $config[ $block_name ] = array_merge( $config[ $block_name ] ?? [], $variations );
+    }
 
     return $config;
 } );
 
- 
+/**
+ * Returns the current department term ID, or 0 when the current view is not a department archive.
+ */
+function farmaciadellabona_get_current_department_id() {
+    return is_tax( 'department' ) ? (int) get_queried_object_id() : 0;
+}
 
-// Logica per lo Staff
-function farmaciadellabona_filter_staff_query( $query, $block ) {
+/**
+ * Restricts a query to the given department term.
+ */
+function farmaciadellabona_add_department_tax_query( $query, $department_id ) {
+    $query['tax_query'] = [[
+        'taxonomy' => 'department',
+        'field'    => 'term_id',
+        'terms'    => $department_id,
+    ]];
 
-    if ( is_tax( 'department' ) ) {
-        $term_id = get_queried_object_id();
-
-        // Recupera l'ID dello staff selezionato nel campo ACF.
-        $staff_id = get_field( 'department_manager', 'term_' . $term_id );
-        
-       
-        if ( $staff_id ) {
-            $query['post__in'] = [ (int) $staff_id ];
-            $query['posts_per_page'] = 1;
-            $query['post_type'] = 'team_member';
-            // unset( $query['tax_query'] );
-        }           
-    }
     return $query;
 }
 
-// Logica per gli Eventi
+// Staff query: shows the manager selected on the current department.
+function farmaciadellabona_filter_staff_query( $query, $block ) {
+
+    $department_id = farmaciadellabona_get_current_department_id();
+
+    if ( ! $department_id ) {
+        return $query;
+    }
+
+    $query['post_type']      = 'team_member';
+    $query['posts_per_page'] = 1;
+
+    // ACF stores taxonomy fields as term meta; reading it directly avoids a fatal error when ACF is inactive.
+    $staff_id = (int) get_term_meta( $department_id, 'department_manager', true );
+
+    // Without a selected manager, show nothing instead of an unrelated team member.
+    $query['post__in'] = $staff_id ? [ $staff_id ] : [ 0 ];
+
+    return $query;
+}
+
+// Events query: upcoming events, nearest first, limited to the current department when on its archive.
 function farmaciadellabona_filter_events_query( $query, $block ) {
-   
+
     $query['post_type'] = 'event';
     $query['meta_query'] = [[
         'key'     => 'event_date',
-        'value'   => date('Ymd'),
+        'value'   => current_time( 'Ymd' ),
         'compare' => '>=',
         'type'    => 'DATE',
     ]];
 
-    /**
-     * Order by the event date so the nearest event appears first.
-     */
+    // Order by the event date so the nearest event appears first.
     $query['meta_key'] = 'event_date';
     $query['orderby']  = 'meta_value_num';
     $query['order']    = 'ASC';
-    return $query;
-}
 
-// Logica per gli Eventi
-function farmaciadellabona_filter_posts_query( $query, $block ) {
-
- 
-    $current_cat_id = get_queried_object_id();
-
-    $query['tax_query'] = [[
-        'taxonomy' => 'department',
-        'field'    => 'term_id',
-        'terms'    => $current_cat_id,
-    ]];
-
-    return $query;
-    
-}
-
-function farmaciadellabona_filter_services_by_current_cat( $query, $block ) {
- 
-    $current_cat_id = get_queried_object_id();
-    $query['post_type'] = 'service';
-    $query['orderby'] = 'menu_order';
-    $query['order']   = 'ASC';
-    
-    if ( empty( $current_cat_id ) ) {
-        return $query;
+    $department_id = farmaciadellabona_get_current_department_id();
+    if ( $department_id ) {
+        $query = farmaciadellabona_add_department_tax_query( $query, $department_id );
     }
 
-    $query['tax_query'] = [[
-        'taxonomy' => 'department',
-        'field'    => 'term_id',
-        'terms'    => $current_cat_id,
-    ]];
+    return $query;
+}
 
-    return $query;   
+// Posts query: limited to the current department when on its archive.
+function farmaciadellabona_filter_posts_query( $query, $block ) {
+
+    $department_id = farmaciadellabona_get_current_department_id();
+    if ( $department_id ) {
+        $query = farmaciadellabona_add_department_tax_query( $query, $department_id );
+    }
+
+    return $query;
+}
+
+// Services query: ordered manually, limited to the current department when on its archive.
+function farmaciadellabona_filter_services_by_current_cat( $query, $block ) {
+
+    $query['post_type'] = 'service';
+    $query['orderby']   = 'menu_order';
+    $query['order']     = 'ASC';
+
+    $department_id = farmaciadellabona_get_current_department_id();
+    if ( $department_id ) {
+        $query = farmaciadellabona_add_department_tax_query( $query, $department_id );
+    }
+
+    return $query;
 }

@@ -9,10 +9,13 @@
  
 <!-- wp:cover {"url":"section_department_service_image","dimRatio":20,"isDark":false,"namespace":"service-section","className":"is-style-section-2","align":"full"} -->
 <div class="wp-block-cover alignfull is-light is-style-section-2"><img class="wp-block-cover__image-background" alt="" src="section_department_service_image" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-20 has-background-dim"></span><div class="wp-block-cover__inner-container">
-    <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">Servizi Disponibili.</p>
+<!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:paragraph -->
+<p>Servizi Disponibili</p>
 <!-- /wp:paragraph -->
-<!-- wp:term-name {"textAlign":"center","level":2} /-->
+
+<!-- wp:term-name {"textAlign":"center","level":2} /--></div>
+<!-- /wp:group -->
 
 
 <!-- wp:query {"query":{"postType":"service","perPage":4,"inherit":false},"namespace":"service-category-query","className":"alignwide"} -->

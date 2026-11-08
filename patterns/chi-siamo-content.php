@@ -21,9 +21,11 @@
 
 <!-- wp:group {"align":"full","className":"is-style-section-1","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull is-style-section-1"><!-- wp:media-text {"align":"wide","mediaPosition":"right","mediaId":180,"mediaLink":"https://farmacia-della-bona.local/dsc_4840-2/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile"><div class="wp-block-media-text__content"><!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">Gli Inizi</h4>
-<!-- /wp:heading -->
+<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile"><div class="wp-block-media-text__content"><!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:heading -->
+<h2 class="wp-block-heading">Gli Inizi</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
 <!-- wp:paragraph {"placeholder":"Contenuto…","className":"is-style-default"} -->
 <p class="is-style-default">L’apertura della prima sede farmaceutica a <strong>San Damaso</strong>, frazione poco distante da <strong>Modena</strong>, risale alla fine del XIX secolo. Dapprima drogheria, poi farmacia, è da sempre situata negli stessi locali e dal 1954 è gestita dalla famiglia <strong>Della Bona</strong>.</p>
@@ -34,11 +36,13 @@
 
 <!-- wp:cover {"url":"<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/images/insegna-omeopatia.png'; ?>","dimRatio":90,"overlayColor":"primary","isUserOverlayColor":true,"sizeSlug":"large","namespace":"hero","align":"full","className":"is-dark is-style-background-2","style":{"spacing":{"margin":{"top":"0","bottom":"0"},"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained","contentSize":"80%","wideSize":""}} -->
 <div class="wp-block-cover alignfull is-dark is-style-background-2" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--80);padding-bottom:var(--wp--preset--spacing--80)"><img class="wp-block-cover__image-background size-large" alt="" src="<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/images/insegna-omeopatia.png'; ?>" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-90 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:media-text {"mediaPosition":"right","mediaId":131,"mediaLink":"http://farmacia-della-bona.local/?attachment_id=131","mediaType":"image","mediaWidth":55,"imageFill":false} -->
-<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 55%"><div class="wp-block-media-text__content"><!-- wp:heading {"fontSize":"xxx-large"} -->
-<h2 class="wp-block-heading has-xxx-large-font-size">Chi Siamo Oggi</h2>
-<!-- /wp:heading -->
+<div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="grid-template-columns:auto 55%"><div class="wp-block-media-text__content"><!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:heading -->
+<h2 class="wp-block-heading">Chi Siamo Oggi</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
-<!-- wp:paragraph -->
+<!-- wp:paragraph {"fontSize":"large"} -->
 <p class="has-large-font-size">Oggi è titolare il dr. Paolo Della Bona, affiancato dalla sorella, dr.ssa Giovanna Della Bona, specializzata in omeopatia e fitoterapia.</p>
 <!-- /wp:paragraph -->
 </div><figure class="wp-block-media-text__media"><img src="<?php echo esc_url( get_stylesheet_directory_uri() ) . '/assets/images/DSC_4946.JPG'; ?>" alt="" class="wp-image-131 size-full"/></figure></div>
@@ -48,9 +52,11 @@
 
 <!-- wp:group {"align":"full","className":"is-style-section-1","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull is-style-section-1"><!-- wp:media-text {"align":"wide","mediaId":180,"mediaLink":"https://farmacia-della-bona.local/dsc_4840-2/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide is-stacked-on-mobile"><div class="wp-block-media-text__content"><!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">Angolo Omeopatia</h4>
-<!-- /wp:heading -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><div class="wp-block-media-text__content"><!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:heading -->
+<h2 class="wp-block-heading">Angolo Omeopatia</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
 
 <!-- wp:paragraph -->
@@ -66,9 +72,11 @@
 
 <!-- wp:group {"align":"full","className":"is-style-section-1","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull is-style-section-1"><!-- wp:media-text {"align":"wide","mediaPosition":"right","mediaId":180,"mediaLink":"https://farmacia-della-bona.local/dsc_4840-2/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile"><div class="wp-block-media-text__content"><!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">Il Laboratorio</h4>
-<!-- /wp:heading -->
+<div class="wp-block-media-text alignwide has-media-on-the-right is-stacked-on-mobile"><div class="wp-block-media-text__content"><!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:heading -->
+<h2 class="wp-block-heading">Il Laboratorio</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
 <!-- wp:paragraph {"placeholder":"Contenuto…","className":"is-style-default"} -->
 <p class="is-style-default">Nel laboratorio della farmacia vengono allestite preparazioni galeniche secondo le recenti Norme di Buona Preparazione.</p>
@@ -88,12 +96,15 @@
  
 
 	
-<!-- wp:paragraph -->
+<!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:paragraph -->
 <p>Farmacia Della Bona</p>
 <!-- /wp:paragraph -->
- <!-- wp:heading -->
+
+<!-- wp:heading -->
 <h2 class="wp-block-heading">Il Nostro Team</h2>
-<!-- /wp:heading -->
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
 <!-- wp:query {"queryId":0,"query":{"perPage":10,"pages":0,"offset":0,"postType":"team_member","order":"desc","orderBy":"menu_order","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[],"format":[]},"namespace":"advanced-query-loop"} -->
 <div class="wp-block-query"><!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->

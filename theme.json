@@ -10,7 +10,7 @@
 					"slug": "gradient-1"
 				},
 				{
-					"gradient": "linear-gradient(to bottom, var(--wp--preset--color--base) calc(100% - 600px), var(--wp--preset--color--base) calc(100% - 300px), var(--wp--preset--color--light-100) 100%)",
+					"gradient": "linear-gradient(to bottom, var(--wp--preset--color--base) calc(100% - 600px), var(--wp--preset--color--secondary) 100%)",
 					"name": "Vertical soft beige to white",
 					"slug": "gradient-2"
 				}
@@ -294,7 +294,7 @@
 		"css": "@media (min-width: 1200px) { .site-menu .wp-block-navigation__container::before { content: ''; } }",
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--helvetica-neue)",
-			"fontSize": "var(--wp--preset--font-size--small)",
+			"fontSize": "var(--wp--preset--font-size--xx-small)",
 			"fontWeight": "300",
 			"lineHeight": "var(--wp--custom--line-height--large)"
 		}

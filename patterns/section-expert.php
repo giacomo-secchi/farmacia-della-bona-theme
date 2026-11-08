@@ -9,8 +9,11 @@
 <!-- wp:group {"className":"is-style-section-1","align":"full","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull is-style-section-1">
 
-<!-- wp:term-description /-->
-<!-- wp:term-name {"level":2} /-->
+<!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:term-description /-->
+
+<!-- wp:term-name {"level":2} /--></div>
+<!-- /wp:group -->
 
 <!-- wp:columns {"align":"wide"} -->
 <div class="wp-block-columns alignwide"><!-- wp:column {"width":"25%"} -->

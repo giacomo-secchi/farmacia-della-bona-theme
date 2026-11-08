@@ -11,14 +11,13 @@
         "blocks": {
             "core/paragraph": {
                 "typography": {
-                    "textAlign": "center",
-                    "textTransform": "uppercase" 
+                    "textAlign": "center"
                 }
             }
         },
         "color": {
             "text": "var:preset|color|base",
-            "gradient": "var:preset|gradient|gradient-1"
+            "gradient": "var:preset|gradient|gradient-2"
         },
         "typography": {
             "fontWeight": "300"
@@ -37,7 +36,6 @@
         "elements": { 
             "heading": {
                 "typography": {
-                    "fontSize": "var:preset|font-size|xxx-large",
                     "textAlign": "center"
                 },
 				"color": {

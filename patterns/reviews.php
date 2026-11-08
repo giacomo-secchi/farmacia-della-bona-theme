@@ -7,12 +7,15 @@
 ?>
 <!-- wp:group {"className":"is-style-section-1","align":"full","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull is-style-section-1">
-<!-- wp:paragraph -->
+<!-- wp:group {"className":"is-style-section-header"} -->
+<div class="wp-block-group is-style-section-header"><!-- wp:paragraph -->
 <p>I nostri clienti</p>
 <!-- /wp:paragraph -->
- <!-- wp:heading -->
+
+<!-- wp:heading -->
 <h2 class="wp-block-heading">Recensioni e Valutazioni</h2>
-<!-- /wp:heading -->
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
     	<!-- wp:group {"align":"wide","layout":{"type":"flex","justifyContent":"space-between"}} -->
 		<div class="wp-block-group alignwide">

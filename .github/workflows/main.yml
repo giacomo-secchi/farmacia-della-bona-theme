@@ -6,24 +6,28 @@ on:
 permissions:
   contents: write
   packages: write
-  actions: read 
+  actions: read
 
+# Reusable workflows are pinned to a commit (tag v3.1.2) so upstream changes cannot break the deploy unexpectedly.
 jobs:
   build:
-    uses: WritePoetry/reusable-workflows/.github/workflows/build.yml@main
+    uses: WritePoetry/reusable-workflows/.github/workflows/build.yml@cdfb8fa8c2600652244aea6b9d0de5c28b2212f1 # v3.1.2
     with:
       artifact_name: ${{ github.event.repository.name }}-build
     secrets: inherit
 
   deploy:
     needs: build
-    uses: WritePoetry/reusable-workflows/.github/workflows/remote-sync.yml@main
+    uses: WritePoetry/reusable-workflows/.github/workflows/deploy.yml@cdfb8fa8c2600652244aea6b9d0de5c28b2212f1 # v3.1.2
     with:
       artifact_name: ${{ github.event.repository.name }}-build
+      # The build artifact already contains the whole theme, compiled blocks included.
+      checkout: false
+      transport: ssh
       host: ${{ vars.HOST }}
       username: ${{ vars.USERNAME }}
       folder: ${{ vars.FOLDER }}
-      paths: |
+      mappings: |
         [
           {
             "from": ".",
@@ -32,4 +36,4 @@ jobs:
           }
         ]
     secrets:
-      ssh-key: ${{ secrets.SSH_KEY }}
+      ssh_key: ${{ secrets.SSH_KEY }}

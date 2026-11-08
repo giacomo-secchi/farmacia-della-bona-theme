@@ -5,11 +5,6 @@
  * Categories: farmacia-della-bona-patterns
  */
 ?>
-<?php
-// The services archive lists every service; elsewhere (home) show a short preview with a link to the archive.
-$is_services_archive = is_post_type_archive( 'service' );
-$services_per_page   = $is_services_archive ? 100 : 4;
-?>
 
 
 
@@ -28,7 +23,7 @@ $services_per_page   = $is_services_archive ? 100 : 4;
 
 
 
-<!-- wp:query {"query":{"postType":"service","perPage":<?php echo (int) $services_per_page; ?>,"inherit":false},"namespace":"service-category-query","className":"alignwide"} -->
+<!-- wp:query {"query":{"postType":"service","perPage":4,"inherit":false},"namespace":"service-category-query","className":"alignwide"} -->
 <div class="wp-block-query alignwide"><!-- wp:post-template {"layout":{"type":"grid","columnCount":4}} -->
     <!-- wp:group {"className":"is-style-card-rounded","layout":{"type":"default"}} -->
     <div class="wp-block-group is-style-card-rounded">
@@ -57,13 +52,11 @@ $services_per_page   = $is_services_archive ? 100 : 4;
 
 
 
-<?php if ( ! $is_services_archive ) : ?>
 <!-- wp:buttons {"align":"wide","layout":{"type":"flex","justifyContent":"right"}} -->
 <div class="wp-block-buttons alignwide"><!-- wp:button -->
 <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( get_post_type_archive_link( 'service' ) ); ?>"><?php esc_html_e( 'Vedi Tutti i Servizi →', 'farmacia-della-bona' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons -->
-<?php endif; ?>
 
 
 </div>

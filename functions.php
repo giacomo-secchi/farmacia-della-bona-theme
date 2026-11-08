@@ -6,6 +6,7 @@ require get_stylesheet_directory() . '/inc/blocks-variations/registration.php';
 require get_stylesheet_directory() . '/inc/blocks-variations/render.php';
 require get_stylesheet_directory() . '/inc/blocks-styles.php';
 require get_stylesheet_directory() . '/inc/blocks-binding.php';
+require get_stylesheet_directory() . '/inc/service-categories.php';
 
 if ( is_admin() ) {
     require get_stylesheet_directory() . '/inc/admin.php';

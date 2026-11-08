@@ -23,7 +23,8 @@ jobs:
       artifact_name: ${{ github.event.repository.name }}-build
       # The build artifact already contains the whole theme, compiled blocks included.
       checkout: false
-      transport: ssh
+      # Cloudways application users are SFTP-only (shell access disabled).
+      transport: sftp
       host: ${{ vars.HOST }}
       username: ${{ vars.USERNAME }}
       folder: ${{ vars.FOLDER }}
@@ -31,7 +32,7 @@ jobs:
         [
           {
             "from": ".",
-            "to": "/themes/${{ github.event.repository.name }}/",
+            "to": "/themes/farmacia-della-bona/",
             "exclude": ".git* .github* node_modules"
           }
         ]

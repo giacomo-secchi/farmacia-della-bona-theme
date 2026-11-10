@@ -13,7 +13,10 @@ add_action( 'init', function() {
         'description'       => __( 'Ordine della categoria', 'farmacia-della-bona' ),
         'single'            => true,
         'default'           => 0,
-        'sanitize_callback' => 'intval',
+        // A closure, not 'intval': the sanitize filter passes 4 args and PHP 8 internal functions reject extras.
+        'sanitize_callback' => function( $value ) {
+            return (int) $value;
+        },
         'show_in_rest'      => true,
     ] );
 } );

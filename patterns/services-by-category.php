@@ -7,36 +7,13 @@
  */
 
 // Sorted like core sorts pages: by the category "Ordine" field, then alphabetically.
-$service_categories = farmaciadellabona_get_ordered_service_categories();
-
-// Services without a category get a final catch-all banner, so none disappear from the page.
-$has_uncategorized = (bool) get_posts(
-	array(
-		'post_type'      => 'service',
-		'posts_per_page' => 1,
-		'fields'         => 'ids',
-		'tax_query'      => array(
-			array(
-				'taxonomy' => 'service_cat',
-				'operator' => 'NOT EXISTS',
-			),
-		),
-	)
-);
-
+// Services saved without a category fall into the taxonomy default term ("Altri Servizi"), so none are left out.
 $banners = array();
-foreach ( $service_categories as $service_category ) {
+foreach ( farmaciadellabona_get_ordered_service_categories() as $service_category ) {
 	$banners[] = array(
 		'title'     => $service_category->name,
 		'tax_query' => array( 'include' => array( 'service_cat' => array( $service_category->term_id ) ) ),
 		'image_id'  => (int) get_term_meta( $service_category->term_id, 'service_cat_image', true ),
-	);
-}
-if ( $has_uncategorized ) {
-	$banners[] = array(
-		'title'     => __( 'Altri Servizi', 'farmacia-della-bona' ),
-		'tax_query' => array( 'exclude' => array( 'service_cat' => wp_list_pluck( $service_categories, 'term_id' ) ) ),
-		'image_id'  => 0,
 	);
 }
 

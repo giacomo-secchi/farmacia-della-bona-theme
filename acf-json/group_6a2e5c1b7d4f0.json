@@ -8,7 +8,7 @@
             "name": "service_cat_image",
             "aria-label": "",
             "type": "image",
-            "instructions": "Sfondo del banner della categoria nella pagina Servizi, quando il banner ha lo stile con immagine. Se vuoto, il banner ha uno sfondo verde.",
+            "instructions": "Sfondo del banner della categoria nella pagina Servizi, quando il banner ha lo stile con immagine. Se vuoto, il banner non ha immagine.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
